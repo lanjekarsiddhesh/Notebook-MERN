@@ -88,7 +88,7 @@ router.post(
 );
 
 //fetch logged-in user data using POST method: "/api/v1/auth/profile".
-router.post("/profile", fetchuser, async (req, res) => {
+router.get("/profile", fetchuser, async (req, res) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
