@@ -34,15 +34,14 @@ export default function Navbar() {
               </li>
               
               <li className="nav-item">
-              <NavLink className="nav-link" to="/Note">
               <img
                 src={addNote}
                 width="35"
                 height="35"
                 alt="Add notes"
-                className="d-inline-block align-text-top m-0 p-0"
+                className="d-inline-block addnote align-text-top m-0 p-0"
+                data-bs-toggle="modal" data-bs-target="#AddnoteBackdrop"
               />
-              </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/About">
@@ -51,15 +50,14 @@ export default function Navbar() {
               </li>
             </ul>
             <div className="d-flex">
-            <NavLink className="nav-link" to="/Login">
               <img
                 src={addUser}
                 width="40"
                 height="40"
                 alt="Add notes"
-                className="d-inline-block align-text-top m-0 p-0"
+                className="d-inline-block userProfile align-text-top m-0 p-0"
+                data-bs-toggle="modal" data-bs-target="#LoginBackdrop"
               />
-              </NavLink>
             </div>
           </div>
         </div>

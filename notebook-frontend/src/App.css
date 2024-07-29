@@ -30,13 +30,17 @@ body{
   font-size: 1.5rem;
 }
 
-.nav-link{
-  color: black;
-}
-
 li{
   margin-left: 3.5rem;
   margin-right: 3.5rem;
+}
+
+.addnote{
+  cursor: pointer;
+}
+
+.userProfile{
+  cursor: pointer;
 }
 
 
@@ -44,18 +48,21 @@ li{
 
 .card {
   width: 290px;
-  height: 400px;
+  height: 430px;
+  margin: 0 auto;
   background-color: #FF4C4C;
   border-radius: 8px;
   z-index: 1;
   box-shadow: 0px 10px 10px rgb(73, 70, 92);
-  justify-content: center;
 }
 
 .top {
   display: flex;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
   align-items: center;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .circle {
@@ -84,20 +91,23 @@ li{
 }
 
 .header {
+  margin: 5px;
   border-radius: 5px;
 }
 
 #title2 {
   color: white;
-  padding-left: 35px;
-  padding-top: 20px;
-  font-size: 15px;
+  padding-left: 20px;
+  font-size: 10px;
+  letter-spacing: 2px;
 }
 
 #Footertitle {
   color: white;
   text-align: center;
   font-size: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .code-container {
@@ -115,6 +125,116 @@ li{
   color: white;
   padding: 10px;
 }
+
+.fa-solid{
+  cursor: pointer;
+  padding-left: 20px;
+}
+
+.pencil:hover{
+  color: #ffafaf;
+}
+
+.trash:hover{
+  color: #ffafaf;
+}
+
+
+/* note */
+
+.Note_card {
+  width: 800px;
+  margin: 0 auto;
+  background-color: #FF4C4C;
+  border-radius: 8px;
+  box-shadow: 0px 10px 10px rgb(73, 70, 92);
+}
+
+.Note_top {
+  text-align: center;
+}
+
+.input {
+  width: 740px;
+  padding: 10px;
+  font-size: small;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgb(73, 70, 92);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+ }
+
+ .note_title{
+  text-align: center;
+}
+
+ .Note_code-container {
+  text-align: center;
+}
+
+
+#description {
+  width: 750px;
+  height: 400px;
+  background-color: rgb(73, 70, 92);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+
+.btn_note{
+  background-color: #FFB22C;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: none;
+}
+
+.btn_note:hover{
+  background-color: #FFC107;
+}
+
+
+/* floatingnote */
+.modal-content{
+  margin: 0 auto;
+  background-color: #FF4C4C;
+  border-radius: 8px;
+  box-shadow: 0px 10px 10px rgb(73, 70, 92);
+} 
+
+.modal-content textarea{
+  width: 450px;
+  height: 330px;
+  resize: none;
+  background-color: rgb(73, 70, 92);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* Floating delete Confirmation */
+
+.Delete_input{
+  width: 450px;
+  height: 40px;
+  text-align: center;
+  background-color: rgb(73, 70, 92);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+}
+
 
 /* login */
 .form_main {
@@ -324,7 +444,7 @@ li{
   position: relative;
 }
 
-.title {
+.Registertitle {
   font-size: 28px;
   color: #FF4C4C;
   font-weight: 600;
@@ -335,7 +455,7 @@ li{
   padding-left: 30px;
 }
 
-.title::before,.title::after {
+.Registertitle::before,.Registertitle::after {
   position: absolute;
   content: "";
   height: 16px;
@@ -345,13 +465,13 @@ li{
   background-color: #FF4C4C;
 }
 
-.title::before {
+.Registertitle::before {
   width: 18px;
   height: 18px;
   background-color: #FF4C4C;
 }
 
-.title::after {
+.Registertitle::after {
   width: 18px;
   height: 18px;
   animation: pulse 1s linear infinite;
@@ -527,6 +647,11 @@ li{
     transform: rotate(360deg);
     background-position: 50% 36px;
   }
+}
+
+
+.pointer{
+  cursor: pointer;
 }
     
   

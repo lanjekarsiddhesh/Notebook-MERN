@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
-    <div>
-      <form action="" className="form_main">
+
+    <div className="modal fade" id="LoginBackdrop"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#LoginBackdrop" aria-hidden="true">
+      <div className="modal-dialog">
+      <div className="modal-content">
+    <div className="container modal-content">
+      <form action="http://localhost:8000/api/v1/auth/Login" className="form_main">
         <p className="heading">Login</p>
         <div className="inputContainer">
           <svg
@@ -46,12 +50,15 @@ export default function Login() {
         </div>
 
         <button id="button">Submit</button>
-        <p className="forgotLink">Already have an acount ? <Link className="forgotLink" to="/SignUp">SignUp</Link> </p>
-        <Link className="forgotLink" to="/forgetPassword">
+        <p className="forgotLink pointer" data-bs-toggle="modal" data-bs-target="#SignupBackdrop">Already have an acount ? SignUp</p>
+        <p className="forgotLink pointer" data-bs-toggle="modal" data-bs-target="#ForgetBackdrop" >
           Forgot your password?
-        </Link>
+        </p>
         
       </form>
+    </div>
+    </div>
+    </div>
     </div>
   );
 }

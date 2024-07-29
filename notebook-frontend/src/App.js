@@ -6,29 +6,37 @@ import Home from './components/Home';
 import Note from './components/Note';
 import About from './components/About';
 import ForgetPassword from './components/ForgetPassword';
+import NoteState from './context/notes/noteState';
+
+
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
+// import Alert from './components/Alert';
+
 
 
 
 function App() {
   return (
-    <div className="App">
+    <>
+      <NoteState>
       <Router>
       <Navbar/>
+      <Note/>
+      <Login/>
+      <SignUp/>
+      <ForgetPassword/>
+      {/* <Alert message="This is alert message"/> */}
       <Routes>
       <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/Login" element={<Login/>}/>
-        <Route exact path="/SignUp" element={<SignUp/>}/>
-        <Route exact path="/Note" element={<Note/>}/>
         <Route exact path="/About" element={<About/>}/>
-        <Route exact path="/forgetPassword" element={<ForgetPassword/>}/>
       </Routes>
       </Router>
-    </div>
+      </NoteState>
+    </>
   );
 }
 

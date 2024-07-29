@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 
 export default function ForgetPassword() {
   return (
-    <div className="mt-5">
+    <div className="modal fade" id="ForgetBackdrop"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#ForgetBackdrop" aria-hidden="true">
+      <div className="modal-dialog">
+      <div className="modal-content">
+    <div className="mt-5 container">
       <form className="form">
         <p className="form-title">Forgot Password</p>
         <div className="input-container">
@@ -31,9 +34,12 @@ export default function ForgetPassword() {
 
         <p className="signup-link">
           No account?
-          <Link to="/SignUp">Sign up</Link>
+          <p className="pointer" data-bs-toggle="modal" data-bs-target="#SignupBackdrop">Sign up</p>
         </p>
       </form>
+    </div>
+    </div>
+    </div>
     </div>
   );
 }
