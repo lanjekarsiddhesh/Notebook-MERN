@@ -1,18 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 export default function SignUp() {
   return (
 
     <div className="modal fade" id="SignupBackdrop"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#SignupBackdrop" aria-hidden="true">
       <div className="modal-dialog">
-      <div className="modal-content">
-    <div className="container">
-      <form
-        className="form"
-        method="post"
-        action="http://localhost:8000/api/v1/auth/SignUp"
-      >
+    <div className="container modal-content signup_form">
         <p className="Registertitle">Register </p>
         <p className="message">Signup now and get full access to our app. </p>
 
@@ -55,11 +48,9 @@ export default function SignUp() {
         <button className="submit" type="submit">
           Submit
         </button>
-        <p className="signin pointer">
-          Already have an acount ? <p className="pointer" data-bs-toggle="modal" data-bs-target="#LoginBackdrop" >Signin</p>{" "}
+        <p className="signin pointer" data-bs-toggle="modal" data-bs-target="#LoginBackdrop" >
+          Already have an acount ? Signin
         </p>
-      </form>
-    </div>
     </div>
     </div>
     </div>

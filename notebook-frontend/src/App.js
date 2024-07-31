@@ -29,7 +29,6 @@ function App() {
       <Login/>
       <SignUp/>
       <ForgetPassword/>
-      {/* <Alert message="This is alert message"/> */}
       <Routes>
       <Route exact path="/" element={<Home/>}/>
         <Route exact path="/About" element={<About/>}/>

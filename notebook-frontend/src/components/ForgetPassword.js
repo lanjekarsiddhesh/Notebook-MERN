@@ -6,9 +6,7 @@ export default function ForgetPassword() {
   return (
     <div className="modal fade" id="ForgetBackdrop"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#ForgetBackdrop" aria-hidden="true">
       <div className="modal-dialog">
-      <div className="modal-content">
-    <div className="mt-5 container">
-      <form className="form">
+    <div className="mt-5 container modal-content forget_form">
         <p className="form-title">Forgot Password</p>
         <div className="input-container">
           <input placeholder="Enter email" type="email" />
@@ -21,9 +19,9 @@ export default function ForgetPassword() {
             >
               <path
                 d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                stroke-width="2"
-                stroke-linejoin="round"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinejoin="round"
+                strokeLinecap="round"
               ></path>
             </svg>
           </span>
@@ -32,12 +30,10 @@ export default function ForgetPassword() {
           Forget
         </button>
 
-        <p className="signup-link">
+        <div className="signup-link pointer">
           No account?
           <p className="pointer" data-bs-toggle="modal" data-bs-target="#SignupBackdrop">Sign up</p>
-        </p>
-      </form>
-    </div>
+        </div>
     </div>
     </div>
     </div>

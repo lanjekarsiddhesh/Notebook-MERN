@@ -7,9 +7,8 @@ export default function Login() {
 
     <div className="modal fade" id="LoginBackdrop"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#LoginBackdrop" aria-hidden="true">
       <div className="modal-dialog">
-      <div className="modal-content">
-    <div className="container modal-content">
-      <form action="http://localhost:8000/api/v1/auth/Login" className="form_main">
+    <div className="container modal-content form_main">
+      {/* <form action="http://localhost:8000/api/v1/auth/Login"> */}
         <p className="heading">Login</p>
         <div className="inputContainer">
           <svg
@@ -55,8 +54,7 @@ export default function Login() {
           Forgot your password?
         </p>
         
-      </form>
-    </div>
+      {/* </form> */}
     </div>
     </div>
     </div>

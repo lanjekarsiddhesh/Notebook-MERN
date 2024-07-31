@@ -1,10 +1,12 @@
 const MongoDB = require("./db");
 const express = require('express');
+var cors = require('cors')
 
 
 MongoDB()
 
 const app = express()
+app.use(cors())
 const port = 8000
 
 app.use(express.json())

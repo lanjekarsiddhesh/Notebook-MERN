@@ -1,32 +1,70 @@
-import React from 'react'
+import React, { useContext, useState } from "react";
+import noteContext from "../context/notes/noteContext";
 
 export default function FloatingNote(props) {
-  const {NoteTitle, NoteDescription} = props
+  const context = useContext(noteContext)
+  const {editNotes} = context;
+  const { Item } = props;
+  const [notes, Editsetnote] = useState({_id:Item._id,title:"",description:"" });
+
+  const onChange = (e)=>{
+    Editsetnote({ ...notes, [e.target.name]: e.target.value });
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    editNotes(notes)
+  }
+
+
   return (
-    <div className="modal fade" id="Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div className="modal-dialog">
+    <div
+      className="modal fade"
+      id={`Update${Item.title.replace(/\s/g, "")}`}
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabIndex="-1"
+      aria-labelledby={`#Update${Item.title.replace(/\s/g, "")}`}
+      aria-hidden="true"
+    >
+      <div className="modal-dialog">
         <form>
-      <div className="modal-content">
-        <div className="modal-header">
-        <input className='input modal-title fs-5' value={NoteTitle} type='text'/>
-          <button type="button" className="btn-close ps-4" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-      
-        <div className="code-container">
-          <textarea className="area" value={NoteDescription} name="code">
-            
-          </textarea>
+          <div className="modal-content flotingNote">
+            <div className="modal-header">
+              <input
+                className="input modal-title fs-5"
+                defaultValue={Item.title}
+                id="title"
+                name="title"
+                type="text"
+                onChange={onChange}
+              />
+              <button
+                type="button"
+                className="btn-close ps-4"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
 
-          <div className="modal-footer">
-        <button type="button" className="btn btn_note">Save</button>
+            <div className="code-container">
+              <textarea
+                className="area"
+                defaultValue={Item.description}
+                id="description"
+                name="description"
+                onChange={onChange}
+              ></textarea>
+
+              <div className="modal-footer">
+                <button type="submit" onClick={handleSubmit} className="btn btn_note">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+          </form>
       </div>
-          
-      </div>
-        
-      </div>
-      </form>
     </div>
-  </div>
-  )
-
+  );
 }
