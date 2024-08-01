@@ -56,6 +56,10 @@ li{
   box-shadow: 0px 10px 10px rgb(73, 70, 92);
 }
 
+.NavItem{
+  margin: 1rem;
+}
+
 .top {
   display: flex;
   font-size: 28px;

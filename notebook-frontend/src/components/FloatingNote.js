@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 
 export default function FloatingNote(props) {
@@ -6,14 +6,15 @@ export default function FloatingNote(props) {
   const {editNotes} = context;
   const { Item } = props;
   const [notes, Editsetnote] = useState({_id:Item._id,title:"",description:"" });
+  const CloseModel = useRef(null)
 
   const onChange = (e)=>{
     Editsetnote({ ...notes, [e.target.name]: e.target.value });
   }
 
   const handleSubmit = (e)=>{
-    e.preventDefault();
     editNotes(notes)
+    CloseModel.current.click()
   }
 
 
@@ -28,7 +29,7 @@ export default function FloatingNote(props) {
       aria-hidden="true"
     >
       <div className="modal-dialog">
-        <form>
+
           <div className="modal-content flotingNote">
             <div className="modal-header">
               <input
@@ -57,13 +58,15 @@ export default function FloatingNote(props) {
               ></textarea>
 
               <div className="modal-footer">
-                <button type="submit" onClick={handleSubmit} className="btn btn_note">
+                <button type="button" ref={CloseModel} data-bs-dismiss="modal" className="btn btn-secondary">
+                  Close
+                </button>
+                <button type="button" onClick={handleSubmit} className="btn btn_note">
                   Save
                 </button>
               </div>
             </div>
           </div>
-          </form>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export default function NotesItem(props) {
     const onChange = ()=>{}
   return (
 <>
-    <div className="card m-5 col">
+    <div className="card NavItem mt-5 col">
         <div className="header">
           <div className="top">
             <div className="circle">
@@ -20,7 +20,7 @@ export default function NotesItem(props) {
               <span className="green circle2"></span>
             </div>
             <div className="title">
-              <p id="title2">{note.title}</p>
+              <p id="title2">{note.title.length > 40 ? note.title.substring(0, 40) + "..." : note.title}</p>
             </div>
           </div>
         </div>

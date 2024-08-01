@@ -14,6 +14,7 @@ export default function Note() {
   const handleSubmitButton = (e) => {
     e.preventDefault();
     addNotes(notes.title, notes.description);
+    document.getElementById("Noteform").reset()
   };
 
   return (
@@ -26,7 +27,7 @@ export default function Note() {
       aria-hidden="true"
     >
       <div className="modal-dialog">
-        <form>
+        <form id="Noteform" >
           <div className="modal-content Note_card m-5">
             <div className="modal-header">
               <div className="Note_top">

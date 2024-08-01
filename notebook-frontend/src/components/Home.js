@@ -12,7 +12,7 @@ export default function Home() {
   },[])
   return (
     <>
-    <div className="row row-cols-1 justify-content-center">
+    <div className=" row row-cols-1 justify-content-center">
 
       
       {notes.map((note)=>{

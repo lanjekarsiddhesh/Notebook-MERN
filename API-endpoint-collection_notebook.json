@@ -1,0 +1,185 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "notebook",
+    "collectionId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+    "dateExported": "2024-07-31T19:52:13.162Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "78370e05-8aaa-4136-adea-77c8387e1f31",
+            "name": "authentication",
+            "containerId": "",
+            "created": "2024-07-18T18:25:28.307Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "3afa8372-3653-4cda-a00c-ef3e249e2b75",
+            "name": "Notes",
+            "containerId": "",
+            "created": "2024-07-19T20:10:38.729Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "643515b9-9f88-48b3-a789-c0ff954ba932",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "78370e05-8aaa-4136-adea-77c8387e1f31",
+            "name": "SignUp",
+            "url": "http://127.0.0.1:8000/api/v1/auth/SignUp",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-07-18T18:25:43.729Z",
+            "modified": "2024-07-31T19:51:24.671Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"siddhesh\",\n  \"email\": \"lanjekar@gmail.com\",\n  \"password\": \"siddhu\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "7961eee8-d091-423b-a90d-db34ca25d307",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "78370e05-8aaa-4136-adea-77c8387e1f31",
+            "name": "Login",
+            "url": "http://127.0.0.1:8000/api/v1/auth/Login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-19T19:00:22.165Z",
+            "modified": "2024-07-31T19:51:29.518Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"lanjekar@gmail.com\",\n  \"password\": \"siddhu\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d83fb8f4-8bf6-4cd9-8524-21c3d3ba4310",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "78370e05-8aaa-4136-adea-77c8387e1f31",
+            "name": "get profile data",
+            "url": "http://127.0.0.1:8000/api/v1/auth/profile",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-07-19T19:59:56.189Z",
+            "modified": "2024-07-31T19:51:35.058Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "auth-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTQxOTI1Mn0.0hWcj6v3_0DnrR-K5KlaSi73JiXa0-YGIVeMgoGL3xs"
+                }
+            ]
+        },
+        {
+            "_id": "e38418ff-8bf6-4dc6-aa6f-3cfcd672eab4",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "3afa8372-3653-4cda-a00c-ef3e249e2b75",
+            "name": "Fetch notes",
+            "url": "http://127.0.0.1:8000/api/v1/notes/show-notes",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-07-21T19:36:46.254Z",
+            "modified": "2024-07-28T17:53:51.641Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk"
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "d6bdb272-ad5c-4114-8281-bcbacae0aa94",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "3afa8372-3653-4cda-a00c-ef3e249e2b75",
+            "name": "Create notes",
+            "url": "http://127.0.0.1:8000/api/v1/notes/create-notes",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-07-21T20:01:36.202Z",
+            "modified": "2024-07-31T19:51:07.402Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "auth-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"javascript\",\n  \"description\":\"Hello this is javascript notes.\\ncreate your cheat.\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "aebe96da-70f5-445e-b262-75f9bface729",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "3afa8372-3653-4cda-a00c-ef3e249e2b75",
+            "name": "Update notes",
+            "url": "http://127.0.0.1:8000/api/v1/notes/update-notes/669d6a973fad7af069d00457",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-07-21T20:31:32.859Z",
+            "modified": "2024-07-31T18:56:10.671Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "auth-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"title\": \"Node js\",\n    \"description\": \"Hello this is Node notes js.\"\n  }",
+                "form": []
+            }
+        },
+        {
+            "_id": "2dff6855-7b83-4c64-82d3-df2022321629",
+            "colId": "02bb825f-2211-4437-a6b6-6e38a7c2befd",
+            "containerId": "3afa8372-3653-4cda-a00c-ef3e249e2b75",
+            "name": "Delete notes",
+            "url": "http://127.0.0.1:8000/api/v1/notes/delete-notes/669d6b4ad5b1990f25cbf0b4",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-07-21T20:46:34.433Z",
+            "modified": "2024-07-31T19:50:59.111Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "auth-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk"
+                }
+            ]
+        }
+    ],
+    "ref": "PYG0p5FdjeNEewzU-FdtuFot07V4wy1_bOfb0BYGIBsjccKmA1JUWm0DlYuiy3xVjG7dwMKUIE5V754ZNhrq5Q"
+}
