@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function ForgetPassword() {
   return (
-    <div className="modal fade" id="ForgetBackdrop"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#ForgetBackdrop" aria-hidden="true">
+    <div className="modal fade" id="ForgetBackdrop" data-bs-backdrop="static"  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="#ForgetBackdrop" aria-hidden="true">
       <div className="modal-dialog">
     <div className="mt-5 container modal-content forget_form">
         <p className="form-title">Forgot Password</p>

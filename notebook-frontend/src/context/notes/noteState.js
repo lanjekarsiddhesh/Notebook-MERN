@@ -1,11 +1,24 @@
 import { useState } from "react";
 import noteContext from "./noteContext";
+const currentDateTime = new Date();
 
 const NoteState = (props) => {
   const host = "http://127.0.0.1:8000";
   const notes_lst = [];
 
   const [notes, Setnotes] = useState(notes_lst);
+  const [alert, Setalert] = useState({ message: "", type: "" });
+
+  //Alert
+  const showAlert = (message, type) => {
+    Setalert({
+      message: message,
+      type: type,
+    });
+    setTimeout(() => {
+      Setalert({ message: "", type: "" });
+    }, 3000);
+  };
 
   //Fetch notes
   const FetchNotes = async () => {
@@ -14,8 +27,8 @@ const NoteState = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk",
+          "auth-token": 
+            localStorage.getItem("auth-token"),
         },
       });
       const Notes = await response.json();
@@ -26,26 +39,35 @@ const NoteState = (props) => {
   };
 
   //Add notes
-  const addNotes = async (title, description) => {
+  const addNotes = async (title, description,slug) => {
     try {
       const response = await fetch(`${host}/api/v1/notes/create-notes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk",
+            localStorage.getItem("auth-token"),
         },
         body: JSON.stringify({
           title: title,
           description: description,
+          slug: slug
         }),
       });
       const Notedata = await response.json();
-      console.log(Notedata)
-      Setnotes(notes.concat(Notedata));
+      console.log(Notedata);
     } catch (error) {
       console.error(error);
     }
+    const date = currentDateTime.toISOString();
+    const newNote = {
+      slug: slug.replace(/[^a-zA-Z]/g, ''),
+      title: title,
+      description: description,
+      date: date,
+      __v: 0,
+    };
+    Setnotes(notes.concat(newNote));
   };
 
   //Edit notes
@@ -58,7 +80,7 @@ const NoteState = (props) => {
           headers: {
             "Content-Type": "application/json",
             "auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk",
+              localStorage.getItem("auth-token"),
           },
           body: JSON.stringify({
             title: updatedNote.title,
@@ -93,26 +115,39 @@ const NoteState = (props) => {
   };
 
   //Delete notes
-  const deleteNotes = async (id) => {
+  const deleteNotes = async (slug) => {
     try {
-      const response = await fetch(`${host}/api/v1/notes/delete-notes/${id}`, {
+      const response = await fetch(`${host}/api/v1/notes/delete-notes/${slug}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY5YWE0NTgyMjYzOGExN2Q3ZGUxMTk2In0sImlhdCI6MTcyMTU5MDY2Nn0.NPEWE-pOsS6rNzFTfBfCCvm1_dWDg-0zhdGgEIg5lAk",
+            localStorage.getItem("auth-token"),
         },
       });
-      const EditNote = response.json();
+      const EditNote = await response.json();
       console.log(EditNote);
     } catch (error) {
       console.error(error);
     }
+    const newNotes = notes.filter((note) => {
+      return note.slug !== slug;
+    });
+    Setnotes(newNotes);
   };
 
   return (
     <noteContext.Provider
-      value={{ notes, Setnotes, addNotes, editNotes, deleteNotes, FetchNotes }}
+      value={{
+        notes,
+        Setnotes,
+        addNotes,
+        editNotes,
+        deleteNotes,
+        FetchNotes,
+        showAlert,
+        alert,
+      }}
     >
       {props.children}
     </noteContext.Provider>

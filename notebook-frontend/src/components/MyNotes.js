@@ -6,27 +6,26 @@ import Alert from "./Alert";
 import { useLocation, useNavigate } from "react-router-dom";
 
 
-export default function Home() {
-  // const context = useContext(noteContext)
-  // const {notes, FetchNotes, showAlert, alert} = context
-  // const navigate = useNavigate()
+export default function MyNotes() {
+  const context = useContext(noteContext)
+  const {notes, FetchNotes, showAlert, alert} = context
+  const navigate = useNavigate()
   
-  // useEffect(()=>{
-  //   if(localStorage.getItem("auth-token")){
-  //     FetchNotes()
-  //   }else{
-  //     navigate("/Notes")
-  //   }
+  useEffect(()=>{
+    if(localStorage.getItem("auth-token")){
+      FetchNotes()
+    }else{
+      navigate("/")
+    }
     
-  //   // eslint-disable-next-line
-  // },[])
+    // eslint-disable-next-line
+  },[])
 
 
   return (
     <>
-    <h1>hello</h1>
 
-    {/* {alert.type !== "danger" && <Alert showAlert={showAlert} />}
+    {alert.type !== "danger" && <Alert showAlert={showAlert} />}
     <div className=" row row-cols-1 justify-content-center">
 
       {notes.map((note)=>{
@@ -35,7 +34,7 @@ export default function Home() {
       
       
 
-    </div> */}
+    </div>
   </>
   );
 }

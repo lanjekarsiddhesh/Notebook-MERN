@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchUser");
 
 const secreat_key = "x6mz3TiWZSXAbN1K7R1aya";
+let success;
 
 //SignUp User using POST method: "/api/v1/auth/SignUp".
 router.post(
@@ -21,14 +22,16 @@ router.post(
   async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      return res.send({ errors: result.array() });
+      success = false
+      return res.status(400).send({success:success, error: result.array() });
     }
 
     let user = await User.findOne({ email: req.body.email });
     if (user) {
+      success = false
       return res
         .status(400)
-        .send({ error: "User already exists with this email." });
+        .send({success:success, error: "User already exists with this email." });
     }
     const salt = await bcrypt.genSalt(10);
     const SecurePassword = await bcrypt.hash(req.body.password, salt);
@@ -43,8 +46,10 @@ router.post(
       },
     };
     const JWTtoken = jwt.sign(data, secreat_key);
+    success = true
     res.json({
       status: 200,
+      success:success,
       message: "User created successfully",
       token: JWTtoken,
     });
@@ -59,30 +64,40 @@ router.post(
   async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      return res.send({ errors: result.array() });
+      success = false
+      return res.send({ success:success, error: result.array() });
     }
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email: email });
-      if (!user)
+      if (!user){
+        success = false
         return res
-          .status(400)
-          .send({ error: "Please enter a correct credentials" });
+        .status(400)
+        .send({success:success, error: "Please enter a correct credentials" });
+      }
+       
+
       const passwordCompare = await bcrypt.compare(password, user.password);
-      if (!passwordCompare)
+      if (!passwordCompare){
+        success = false
         return res
           .status(400)
-          .send({ error: "Please enter a correct credentials" });
+          .send({ success:success, error: "Please enter a correct credentials" });
+      }
+        
       const data = {
         user: {
           id: user.id,
         },
       };
+
       const JWTtoken = jwt.sign(data, secreat_key);
-      res.json({ status: 200, message: "Login successfully", token: JWTtoken });
+      success = true
+      res.json({ status: 200, success:success, message: "Login successfully", token: JWTtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send({ error: "Bad request" });
+      res.status(500).send({ success:success, error: "Bad request" });
     }
   }
 );
@@ -92,10 +107,11 @@ router.get("/profile", fetchuser, async (req, res) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
-    res.send(user);
+    res.status(200).send(user);
   } catch (e) {
     console.error(e.message);
-    res.status(500).send({ error: "Bad request" });
+    success = false
+    res.status(500).send({ success:success, error: "Bad request" });
   }
 });
 

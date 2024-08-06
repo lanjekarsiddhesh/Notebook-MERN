@@ -3,9 +3,9 @@ import noteContext from "../context/notes/noteContext";
 
 export default function FloatingNote(props) {
   const context = useContext(noteContext)
-  const {editNotes} = context;
+  const {editNotes,showAlert} = context;
   const { Item } = props;
-  const [notes, Editsetnote] = useState({_id:Item._id,title:"",description:"" });
+  const [notes, Editsetnote] = useState({_id:Item._id,title:Item.title,description:Item.description });
   const CloseModel = useRef(null)
 
   const onChange = (e)=>{
@@ -15,17 +15,18 @@ export default function FloatingNote(props) {
   const handleSubmit = (e)=>{
     editNotes(notes)
     CloseModel.current.click()
+    showAlert("Note updated successfully", "success");
   }
 
 
   return (
     <div
       className="modal fade"
-      id={`Update${Item.title.replace(/\s/g, "")}`}
+      id={`Update${Item.slug}`}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabIndex="-1"
-      aria-labelledby={`#Update${Item.title.replace(/\s/g, "")}`}
+      aria-labelledby={`#Update${Item.slug}`}
       aria-hidden="true"
     >
       <div className="modal-dialog">

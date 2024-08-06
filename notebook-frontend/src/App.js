@@ -4,7 +4,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import Note from './components/Note';
-import About from './components/About';
+import MyNotes from './components/MyNotes';
 import ForgetPassword from './components/ForgetPassword';
 import NoteState from './context/notes/noteState';
 
@@ -14,12 +14,23 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-// import Alert from './components/Alert';
-
-
-
+import { useEffect } from 'react';
 
 function App() {
+  //refresh screen if we swipe down in phone
+  useEffect(() => {
+    const handleTouchMove = (event) => {
+      if (event.touches.length === 1 && event.touches[0].clientY > 0) {
+        // Swipe down detected, refresh the page
+        window.location.reload();
+      }
+    };
+    window.addEventListener('touchmove', handleTouchMove);
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
   return (
     <>
       <NoteState>
@@ -31,7 +42,7 @@ function App() {
       <ForgetPassword/>
       <Routes>
       <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/About" element={<About/>}/>
+      <Route exact path="/Notes" element={<MyNotes/>}/>
       </Routes>
       </Router>
       </NoteState>

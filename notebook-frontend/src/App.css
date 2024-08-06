@@ -12,6 +12,14 @@ body{
 	padding: 0;
 }
 
+.fs {
+  font-size: 1rem;
+}
+
+.nav-link-My-note{
+  cursor: pointer;
+}
+
 .navbar {
   background-color: #FFB22C;
 }
@@ -243,8 +251,8 @@ li{
 
 /* login */
 .form_main {
-  width: 320px;
-  height: 420px;
+  width: 420px;
+  height: 520px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,45 +1,45 @@
 import React, { useContext, useRef, useState } from 'react'
 import noteContext from "../context/notes/noteContext";
+import Alert from './Alert';
 
 
 export default function FloatingDelete(props) {
   const context = useContext(noteContext)
-  const {deleteNotes} = context
+  const {deleteNotes,showAlert} = context
     const {Item} = props
     var ID 
-    const [id,setID] = useState(ID)
+    const [slug,setslug] = useState(ID)
     const CloseModel = useRef(null)
 
-
-  
-
     const ConfirmDeleteNote = (e) => {
-      if (e.target.value === Item._id){
+      if (e.target.value === Item.slug){
       }
-      setID(e.target.value)
+      setslug(e.target.value)
     }
 
     const DeleteNote = (e) =>{
       e.preventDefault();
-      if (id === Item._id){
-        deleteNotes(Item._id)
+      if (slug === Item.slug){
+        deleteNotes(Item.slug)
         CloseModel.current.click()
+        showAlert(`${Item.title} note is successfully deleted.`,'success')
       }else{
-        console.log("ID doesn't match")
+        showAlert("May be you enter wrong confirmation ID","danger")
       }
       
     }
   return (
 <>
-     <div tabIndex="-1" aria-labelledby={`#${Item.title.replace(/\s/g, "")}`} aria-hidden="true" className="modal" id={`${Item.title.replace(/\s/g, "")}`} >
+     <div tabIndex="-1" aria-labelledby={`#${Item.slug}`} data-bs-backdrop="static" aria-hidden="true" className="modal" id={`${Item.slug}`} >
   <div className="modal-dialog">
     <form>
     <div className="modal-content flotingNote">
+    <Alert showAlert={showAlert} />
       <div className="modal-header">
-        <h1 className="modal-title fs-5" id="BackdropLabel">{Item._id}</h1>
+        <h1 className="modal-title fs-5" id="BackdropLabel">{Item.slug}</h1>
       </div>
       <div className="modal-body">
-      <input className='Delete_input modal-title fs-6' placeholder={`Enter Above ID to Confirmation ${Item._id}`} onChange={ConfirmDeleteNote} type='text'/>
+      <input className='Delete_input modal-title fs-6' placeholder={`Enter Above ID to Confirmation ${Item.slug}`} onChange={ConfirmDeleteNote} type='text'/>
       </div>
       <div className="modal-footer">
         <button type="button" ref={CloseModel} data-bs-dismiss="modal" className="btn btn-secondary" >Close</button>

@@ -24,6 +24,7 @@ router.post(
       .isLength({ min: 3 })
       .withMessage("Title must be at leasst 3 characters"),
     body("description").exists().withMessage("Write something in description"),
+    body("slug").exists().withMessage("something in wrong!!! Please try again..."),
   ],
   async (req, res) => {
     const result = validationResult(req);
@@ -31,18 +32,48 @@ router.post(
       return res.send({ errors: result.array() });
     }
     try {
-      const note = new Notes({
-        user: req.user.id,
-        title: req.body.title,
-        description: req.body.description,
-      });
-      const SavedNotes = await note.save();
 
-      res.json({
-        status: 200,
-        message: "Notes created successfully",
-        notes: SavedNotes,
-      });
+      const alpha = "QWERTYUIOPasdfghjklZXCVBNMqwertyuiopASDFGHJKLzxcvbnm"
+      let newalpha = req.body.title.replace(/[^a-zA-Z]/g, '')
+
+
+      let note = ""
+
+      async function SaveData(){
+        const note = new Notes({
+          user: req.user.id,
+          title: req.body.title,
+          description: req.body.description,
+          slug: newalpha.substring(0,24),
+        });
+        const SavedNotes = await note.save();
+        res.json({
+          status: 200,
+          message: "Notes created successfully",
+          notes: SavedNotes,
+        });
+      }
+
+      async function CreateSlug(){
+          for (let i = 0; i < 10; i++) {
+            newalpha += alpha[Math.floor(Math.random() * alpha.length)]
+              }
+          note = await Notes.findOne({ user: req.user.id, slug:newalpha });
+          if(!note){
+            SaveData()
+          }
+          }
+
+          
+      note = await Notes.findOne({ user: req.user.id, slug:newalpha });
+      
+
+      if(!note){
+        SaveData()
+      }else{
+        CreateSlug()
+      }
+  
     } catch (error) {
       console.error(error.message);
       res.status(500).send({ error: "Bad request" });
@@ -88,16 +119,18 @@ router.put("/update-notes/:id", fetchuser, async (req, res) => {
 });
 
 //authorize User delete their notes using POST method: "/api/v1/notes/delete-notes/:id".
-router.delete("/delete-notes/:id", fetchuser, async (req, res) => {
+router.delete("/delete-notes/:slug", fetchuser, async (req, res) => {
+ 
   try {
-    const notes = await Notes.findById(req.params.id);
+    // const notes = await Notes.findById(req.params.id);
+    const notes = await Notes.findOne({slug:req.params.slug})
     if (!notes) {
       return res.status(404).send({ error: "Notes not found" });
     }
     if (notes.user.toString() !== req.user.id) {
       return res.status(401).send({ error: "Not authorized" });
     }
-    const deletednotes = await Notes.findByIdAndDelete(req.params.id);
+    const deletednotes = await Notes.findOneAndDelete({slug:req.params.slug})
 
     res.json({
       status: 200,

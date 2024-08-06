@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import MessageContext from "../context/notes/noteContext";
 
-export default function Alert(props) {
+export default function Alert() {
+  const MSGcontext = useContext(MessageContext)
+  const {alert} = MSGcontext
   return (
-    <div>
-        <div className="alert alert-success" role="alert">
-        {props.message}
-        </div>
-            
-    </div>
+   <>
+        {alert && <div className={`alert alert-${alert.type} alert-dismissible fade show text-center p-2 m-0`} role="alert">
+        <strong>{alert.message}</strong>
+        </div>}
+
+        </>
+  
   )
 }

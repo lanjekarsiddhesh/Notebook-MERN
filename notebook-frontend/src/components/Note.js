@@ -1,24 +1,42 @@
 import React, { useContext, useState } from "react";
 import noteContext from "../context/notes/noteContext";
+import Alert from "./Alert";
+import { useNavigate } from "react-router-dom";
 
 export default function Note() {
   const context = useContext(noteContext);
-  const { addNotes } = context;
+  const { addNotes, showAlert } = context;
+  const history = useNavigate()
 
-  const [notes, Setnotes] = useState({ title: "", description: "" });
+  const alpha = "QWERTYUIOPasdfghjklZXCVBNMqwertyuiopASDFGHJKLzxcvbnm"
+  let newalpha = ""
+  const [newslug, Setnewslug] = useState(newalpha);
+  function CreateSlug(title){
+      for (let i = 0; i < 10; i++) {
+        newalpha += title+alpha[Math.floor(Math.random() * alpha.length)]
+          }
+          Setnewslug(newalpha.slice(0,40))
+      }
 
+  const [notes, Setnotes] = useState({ title: "", description: "", slug: newslug });
   const onChange = (e) => {
-    Setnotes({ ...notes, [e.target.name]: e.target.value });
+    if(e.target.name === "title"){
+      newalpha += e.target.value
+      CreateSlug(newalpha)
+    }
+    Setnotes({ ...notes, [e.target.name]: e.target.value, slug: newslug});
+    
   };
 
   const handleSubmitButton = (e) => {
     e.preventDefault();
-    addNotes(notes.title, notes.description);
-    document.getElementById("Noteform").reset()
+    addNotes(notes.title, notes.description, notes.slug);
+    document.getElementById("Noteform").reset();
+    showAlert("Note created successfully", "success");
+    history("/Notes");
   };
 
   return (
-   
     <div
       className="modal fade modal-lg"
       id="AddnoteBackdrop"
@@ -27,8 +45,9 @@ export default function Note() {
       aria-hidden="true"
     >
       <div className="modal-dialog">
-        <form id="Noteform" >
+        <form id="Noteform">
           <div className="modal-content Note_card m-5">
+            <Alert showAlert={showAlert} />
             <div className="modal-header">
               <div className="Note_top">
                 <h5 className="note_title">Your note</h5>
@@ -68,6 +87,5 @@ export default function Note() {
         </form>
       </div>
     </div>
-  
   );
 }

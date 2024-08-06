@@ -14,6 +14,11 @@ const NoteSchema = new Schema({
     type: String,
     default: "Write your notes here..."
   },
+  slug: {
+    type: String,
+    unique: true,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now

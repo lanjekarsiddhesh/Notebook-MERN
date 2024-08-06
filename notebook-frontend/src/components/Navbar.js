@@ -2,10 +2,15 @@ import React from 'react'
 import '../App.css';
 import addNote from "../images/addSign.png";
 import addUser from "../images/AddUser.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 
 export default function Navbar() { 
+  const navigate = useNavigate()
+  const handleLogout = ()=>{
+    localStorage.removeItem("auth-token")
+    navigate("/")
+  }
 
   return (
     <div>
@@ -26,6 +31,7 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            
             <ul className="navbar-nav me-auto mb-2 justify-content-around mb-lg-0 ">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
@@ -33,32 +39,52 @@ export default function Navbar() {
                 </NavLink>
               </li>
               
-              <li className="nav-item">
+              <li className="nav-item me-3">
+              <a data-bs-toggle="modal" data-bs-target={localStorage.getItem("auth-token") ?"#AddnoteBackdrop":"#LoginBackdrop"}>
               <img
                 src={addNote}
                 width="35"
                 height="35"
                 alt="Add notes"
-                className="d-inline-block addnote align-text-top m-0 p-0"
-                data-bs-toggle="modal" data-bs-target="#AddnoteBackdrop"
+                className="d-inline-block addnote align-text-top ms-3 p-0"
+                
               />
+              <p className='mb-0 fs' >Add Note</p>
+              </a>
               </li>
+
+              {localStorage.getItem("auth-token")?<li className="nav-item">
+                <NavLink className="nav-link" to="/Notes">
+                  My Notes
+                </NavLink></li>:
               <li className="nav-item">
-                <NavLink className="nav-link" to="/About">
-                  About
-                </NavLink>
-              </li>
+                <p className="nav-link nav-link-My-note" data-bs-toggle="modal" data-bs-target="#LoginBackdrop" >My notes</p>
+            </li>}
             </ul>
-            <div className="d-flex">
+
+
+            {!localStorage.getItem("auth-token")?<div id="loginDiv" className="d-flex flex-column ">
               <img
                 src={addUser}
                 width="40"
                 height="40"
-                alt="Add notes"
-                className="d-inline-block userProfile align-text-top m-0 p-0"
+                alt="Login/SignUp"
+                id="LoginButton"
+                className="d-inline-block ms-3 userProfile align-text-top m-0 p-0"
                 data-bs-toggle="modal" data-bs-target="#LoginBackdrop"
               />
-            </div>
+              <p className='mb-0' >Login/SignUp</p>
+            </div>:<div onClick={handleLogout} className="d-flex flex-column ">
+              <img
+                src={addUser}
+                width="40"
+                height="40"
+                alt="LogOut"
+                className="d-inline-block ms-1 userProfile align-text-top m-0 p-0"
+                
+              />
+              <p className='mb-0 userProfile' >Logout</p>
+            </div>}
           </div>
         </div>
       </nav>
