@@ -17,7 +17,6 @@ export default function MyNotes() {
     }else{
       navigate("/")
     }
-    
     // eslint-disable-next-line
   },[])
 
@@ -29,11 +28,9 @@ export default function MyNotes() {
     <div className=" row row-cols-1 justify-content-center">
 
       {notes.map((note)=>{
-        return <NotesItem key={note._id} note={note}/>
+        return <NotesItem key={note.slug} note={note}/>
       })}
       
-      
-
     </div>
   </>
   );

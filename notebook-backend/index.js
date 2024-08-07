@@ -7,7 +7,7 @@ MongoDB()
 
 const app = express()
 app.use(cors())
-const port = 8000
+const port =  process.env.PORT || 8000
 
 app.use(express.json())
 app.use("/api/v1/auth",require("./routes/auth"))
